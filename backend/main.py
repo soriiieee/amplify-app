@@ -2,7 +2,7 @@ import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import persona, battle
+from routers import persona, battle, auth
 import database
 
 _raw = os.environ.get("CORS_ORIGINS", "http://localhost:3000")
@@ -24,6 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth.router, prefix="/api/auth")
 app.include_router(persona.router, prefix="/api/persona")
 app.include_router(battle.router, prefix="/api/battle")
 

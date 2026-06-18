@@ -4,6 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
+.claude/
+.vscode/
+DEPLOY_VERCEL.md
 
 # testing
 /coverage
