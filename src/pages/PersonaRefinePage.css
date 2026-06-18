@@ -1,0 +1,161 @@
+.refine-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.refine-title { text-align: center; font-size: 1.8rem; margin: 0 0 20px; }
+
+.persona-card {
+  background: #16213e;
+  border: 1px solid #333;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+.persona-card h2 { margin: 0 0 12px; font-size: 1.1rem; }
+
+.traits { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.trait-tag {
+  background: #e74c3c22;
+  border: 1px solid #e74c3c66;
+  color: #ff8a80;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.82rem;
+}
+
+.persona-detail { display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; }
+.label { color: #aaa; margin-right: 6px; }
+
+.annoyance { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.annoyance-bar { font-size: 1rem; letter-spacing: -2px; }
+.annoyance-num { color: #e74c3c; font-weight: bold; }
+
+/* 滅設定エリア */
+.metsu-setup {
+  background: #0d1b2e;
+  border: 1px solid #2a3a52;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.setup-section-title {
+  font-size: 1rem;
+  color: #e74c3c;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.06em;
+}
+
+.setup-section { display: flex; flex-direction: column; gap: 8px; }
+
+.setup-label {
+  font-size: 0.78rem;
+  font-weight: bold;
+  color: #778;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* 段階数ボタン */
+.stage-options { display: flex; gap: 8px; }
+
+.stage-btn {
+  flex: 1;
+  padding: 10px 4px;
+  background: #16213e;
+  border: 1px solid #3a4a60;
+  border-radius: 10px;
+  color: #99a;
+  font-size: 0.82rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.stage-btn:hover { border-color: #e74c3c88; color: #ccc; }
+.stage-btn.active {
+  background: #e74c3c18;
+  border-color: #e74c3c;
+  color: #ff8a80;
+}
+
+/* カスタムスライダー */
+.custom-stage {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.stage-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 4px;
+  background: #2a3a52;
+  outline: none;
+  cursor: pointer;
+}
+.stage-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #e74c3c;
+  cursor: pointer;
+  box-shadow: 0 0 6px #e74c3c88;
+}
+
+.stage-value {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #e74c3c;
+  min-width: 52px;
+  text-align: right;
+}
+
+/* 状況・崩壊ボタン */
+.option-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* 状況補足テキストエリア */
+.situation-note {
+  width: 100%;
+  background: #111d30;
+  border: 1px solid #3a4a60;
+  border-radius: 10px;
+  color: #ccc;
+  font-size: 0.88rem;
+  padding: 10px 12px;
+  resize: none;
+  outline: none;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+.situation-note::placeholder { color: #445; }
+.situation-note:focus { border-color: #e74c3c88; }
+
+.option-btn {
+  padding: 8px 14px;
+  background: #16213e;
+  border: 1px solid #3a4a60;
+  border-radius: 20px;
+  color: #99a;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.option-btn:hover { border-color: #e74c3c88; color: #ccc; }
+.option-btn.active {
+  background: #e74c3c18;
+  border-color: #e74c3c;
+  color: #ff8a80;
+  font-weight: bold;
+}

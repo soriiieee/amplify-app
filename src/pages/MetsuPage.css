@@ -1,0 +1,119 @@
+.metsu-page {
+  position: fixed;
+  inset: 0;
+  background: #1a1a2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* 画面クラック オーバーレイ */
+.crack-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background:
+    repeating-linear-gradient(
+      45deg, transparent, transparent 2px, rgba(255,255,255,0.05) 2px, rgba(255,255,255,0.05) 4px
+    );
+}
+.phase-crack .crack-overlay { opacity: 1; animation: crack-flash 0.8s ease forwards; }
+@keyframes crack-flash {
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* 上司コンテナ */
+.boss-container {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+.phase-vanish .boss-container { transform: translateX(-50%) scale(0) rotate(720deg); opacity: 0; }
+
+.boss-final { font-size: 5rem; animation: tremble 0.15s linear infinite; }
+@keyframes tremble {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-3px, 2px); }
+  75% { transform: translate(3px, -2px); }
+}
+.phase-vanish .boss-final { animation: none; }
+
+.final-blow-text {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #e74c3c;
+  max-width: 240px;
+}
+
+/* 滅 の漢字 */
+.metsu-kanji {
+  position: absolute;
+  font-size: 20vw;
+  font-weight: 900;
+  color: #e74c3c;
+  opacity: 0;
+  transform: scale(3);
+  text-shadow: 0 0 40px #e74c3c, 0 0 80px #ff000088;
+  transition: opacity 0.4s, transform 0.4s;
+  pointer-events: none;
+  z-index: 10;
+}
+.phase-metsu .metsu-kanji,
+.phase-vanish .metsu-kanji { opacity: 1; transform: scale(1); }
+.phase-done .metsu-kanji { opacity: 0; transform: scale(0); }
+
+/* 爆発エフェクト */
+.explosion { position: absolute; inset: 0; pointer-events: none; }
+.spark {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0;
+}
+.phase-metsu .spark, .phase-vanish .spark { animation: explode 0.8s ease forwards; }
+
+.spark-0 { top: 20%; left: 15%; animation-delay: 0.0s !important; }
+.spark-1 { top: 10%; left: 70%; animation-delay: 0.1s !important; }
+.spark-2 { top: 60%; left: 80%; animation-delay: 0.05s !important; }
+.spark-3 { top: 70%; left: 20%; animation-delay: 0.15s !important; }
+.spark-4 { top: 40%; left: 45%; animation-delay: 0.08s !important; }
+
+@keyframes explode {
+  0%   { opacity: 0; transform: scale(0.5) translate(0, 0); }
+  40%  { opacity: 1; transform: scale(1.4) translate(var(--dx, 20px), var(--dy, -20px)); }
+  100% { opacity: 0; transform: scale(0.8) translate(var(--dx, 40px), var(--dy, 40px)); }
+}
+
+/* 画面全体フラッシュ */
+.phase-metsu { animation: bg-flash 0.4s ease; }
+@keyframes bg-flash {
+  0%   { background: #1a1a2e; }
+  30%  { background: #5c0000; }
+  100% { background: #1a1a2e; }
+}
+
+/* 完了スクリーン */
+.done-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 16px;
+  text-align: center;
+  animation: fade-in 0.5s ease;
+  max-width: 360px;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.done-title { font-size: 1.6rem; margin: 0; color: #fff; }
+.done-msg { color: #aaa; margin: 0; }
+.done-screen .btn-primary { max-width: 240px; }
