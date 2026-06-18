@@ -1,70 +1,150 @@
-# Getting Started with Create React App
+# 嫌すぎて滅
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ストレス発散用の上司ボコボコアプリ。嫌な上司を登録して、AIが生成した攻撃パターンで仮想的にやっつけるWebアプリです。
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## アプリ概要
 
-### `npm start`
+```
+① 上司登録       → 名前・メモ or 写真でAIがペルソナ推定
+② ペルソナ精緻化 → AIとの2ラリー対話で上司の性格を深掘り
+③ バトル         → クリック数を選択 → AIが攻撃パターンを3案提案
+④ 滅エンディング → 派手なCSSアニメーションで上司が消える
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 主な機能
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 上司の名前・性格メモ、または写真（Claude Vision）でペルソナ自動生成
+- AIとの対話（2ラリー）でペルソナを精緻化
+- バトル時にAIが笑えるオリジナル攻撃パターンを3案提案
+- HPゲージ・ダメージアニメーション・「滅」の派手な演出
+- ペルソナ・バトルログをSQLiteに保存
+- スマホ対応（モバイルファーストのレスポンシブデザイン）
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 技術スタック
 
-### `npm run build`
+| レイヤー | 技術 |
+|---|---|
+| フロントエンド | React 19 (Create React App) |
+| バックエンド | Python 3.12 + FastAPI |
+| AI | Claude API (claude-haiku-4-5、Vision対応) |
+| DB | SQLite（Python組み込み） |
+| パッケージ管理（Python） | uv |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## セットアップ
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 前提条件
 
-### `npm run eject`
+- Node.js 18以上
+- Python 3.12以上
+- [uv](https://github.com/astral-sh/uv)
+- Anthropic API キー
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 初回セットアップ
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+# 依存関係を一括インストール（Python仮想環境 + npm）
+make install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# バックエンドの環境変数を設定
+cp backend/.env.example backend/.env
+# backend/.env を開き ANTHROPIC_API_KEY を設定
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 起動
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+# フロントエンド＋バックエンドを同時起動
+make dev
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# 個別起動
+make backend    # http://localhost:8000
+make frontend   # http://localhost:3000
+```
 
-### Code Splitting
+ブラウザで http://localhost:3000 を開く。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 使い方
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 1. 上司を登録する
 
-### Making a Progressive Web App
+- 上司の名前を入力
+- テキストメモ（どんな人か）を入力、または写真をアップロード
+- 「次へ」でAIがペルソナを自動生成
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 2. ペルソナを精緻化する
 
-### Advanced Configuration
+- AIが生成した性格分析（特徴・口癖・弱点・嫌さレベル）を確認
+- AIからの質問に答えてペルソナを深掘り（2ラリー）
+- 「このままバトルへ」で途中スキップも可能
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 3. バトルする
 
-### Deployment
+- 攻撃回数（5 / 10 / 30発）を選択
+- 「攻撃パターンをAIに聞く」でAIが3案を提案
+- 好みのパターンを選んで「ぶん殴る！」をタップ
+- HPが0になると滅エンディングへ
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 4. 滅エンディング
 
-### `npm run build` fails to minify
+- 派手なCSSアニメーションで上司が消滅
+- 「もう一度やる」で最初に戻る
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## ログ確認
+
+バトルの記録はSQLiteに自動保存されます。
+
+```bash
+sqlite3 backend/data/app.db "SELECT * FROM persona_logs;"
+sqlite3 backend/data/app.db "SELECT * FROM battle_logs;"
+```
+
+> `backend/data/` はGitHubには上がりません（.gitignoreで除外）。
+
+---
+
+## ディレクトリ構成
+
+```
+amplify-app/
+├── Makefile
+├── backend/
+│   ├── main.py               # FastAPIアプリ本体
+│   ├── database.py           # SQLiteログ管理
+│   ├── pyproject.toml        # Python依存関係（uv）
+│   ├── .env.example          # 環境変数テンプレート
+│   ├── routers/
+│   │   ├── persona.py        # /api/persona/analyze, /refine
+│   │   └── battle.py         # /api/battle/suggest
+│   └── services/
+│       └── claude_client.py  # Claude API呼び出し
+└── src/
+    ├── App.js                # ルーティング
+    └── pages/
+        ├── SetupPage.js      # 上司登録
+        ├── PersonaRefinePage.js  # ペルソナ精緻化
+        ├── BattlePage.js     # バトル
+        └── MetsuPage.js      # 滅エンディング
+```
+
+---
+
+## 環境変数
+
+`backend/.env` に以下を設定する。
+
+| 変数名 | 説明 | デフォルト |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | Anthropic APIキー | （必須） |
+| `DB_PATH` | SQLiteファイルパス | `data/app.db` |
